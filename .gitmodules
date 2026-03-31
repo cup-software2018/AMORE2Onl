@@ -1,0 +1,4 @@
+[submodule "CUPDAQ"]
+	path = CUPDAQ
+	url = https://github.com/cup-software2018/CUPDAQ.git
+	ignore = dirty
