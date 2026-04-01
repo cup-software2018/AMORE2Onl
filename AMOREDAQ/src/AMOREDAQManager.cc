@@ -214,22 +214,41 @@ bool AMOREDAQManager::PrepareDAQ()
     return false;
   }
 
+  // preparing chunk data buffer for swtrigger
   fFIFOs.clear();
   int dsr = 0;
+  int rl = 0;
   for (int i = 0; i < nadc; ++i) {
     auto * adc = static_cast<AbsADC *>(fCont[i]);
     auto * conf = static_cast<AMOREADCConf *>(adc->GetConfig());
     dsr = conf->SR();
+    rl = conf->RL();
 
     int head = conf->DLY();
-    int tail = conf->RL() - head;
+    int tail = rl - head;
     fFIFOs.push_back(std::make_unique<AMOREChunkFIFO>(kNCHAMOREADC, head, tail));
   }
 
+  // sorting ADCs with SID
   Sort();
 
+  fMinimumBCount = AMORE::kMINIMUMBCOUNT;
+  fRecordLength = rl;
+
+  // for time integrity check in swtringger
   fTimeDelta = dsr * 1000;
 
+  std::string report = "\n\n";
+  report += "============ AMOREDAQManager Preparation Report ==============\n";
+  report += Form("                       type: %s\n", GetADCName(fADCType));
+  report += Form("              number of ADC: %d\n", nadc);
+  report += Form("      minimum buffer count : %d\n", fMinimumBCount);
+  report += Form("             record length : %d\n", fRecordLength);
+  report += "==============================================================\n";
+
+  INFO("%s", report.c_str());
+
+  // for Debug Monitoring
   fRemainingBCount = new int[nadc];
   for (int i = 0; i < nadc; i++) {
     fRemainingBCount[i] = 0;

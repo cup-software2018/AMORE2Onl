@@ -24,6 +24,7 @@ set ( DICT_I_FLAGS
     -I${CMAKE_SOURCE_DIR}/AMORE
     -I${CMAKE_SOURCE_DIR}/AMORESystem
     -I${CMAKE_SOURCE_DIR}/AMOREAlgs
+    -I${CMAKE_SOURCE_DIR}/AMOREHDF5
     -I${HDF5_INCLUDE_DIRS}
 )
 
@@ -69,6 +70,7 @@ target_link_libraries ( ${MODULE_NAME}
     AMORE
     AMORESystem
     AMOREAlgs
+    AMOREHDF5
 )
 
 target_compile_definitions ( ${MODULE_NAME}

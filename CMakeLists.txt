@@ -58,6 +58,7 @@ add_compile_options ( -O2 )
 add_subdirectory ( AMORE )
 add_subdirectory ( AMOREAlgs )
 add_subdirectory ( AMORESystem )
+add_subdirectory ( AMOREHDF5 )
 add_subdirectory ( AMOREDAQ )
 
 # ---- Environment Setup Script Generation (setup_amore2onl.sh) ----

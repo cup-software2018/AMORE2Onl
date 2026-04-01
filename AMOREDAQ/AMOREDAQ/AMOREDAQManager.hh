@@ -9,7 +9,7 @@
 #include "DAQ/CupDAQManager.hh"
 #include "DAQConfig/AbsConf.hh"
 #include "DAQConfig/AbsConfList.hh"
-#include "HDF5Utils/EDM.hh"
+#include "AMOREHDF5/AMOREEDM.hh"
 #include "OnlConsts/onlconsts.hh"
 #include "DAQUtils/ConcurrentDeque.hh"
 
